@@ -10,17 +10,17 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
 	/*
 	 * province table sql
 	 */
-	public static final String CREATE_PROVINCE = "create table provice (" +
-												 "id integer primary key autoincrement" +
-												 "province_name text," +
-												 "province_code text ";
-	public static final String CREATE_CITY = "create table City ("
+	public static final String CREATE_PROVINCE = "create table province (" +
+												 "id integer primary key autoincrement, " +
+												 "province_name text, " +
+												 "province_code text)";
+	public static final String CREATE_CITY = "create table city ("
 			+ "id integer primary key autoincrement, "
 			+ "city_name text, "
 			+ "city_code text, "
 			+ "province_id integer)";
 	
-	public static final String CREATE_COUNTY = "create table County ("
+	public static final String CREATE_COUNTY = "create table county ("
 			+ "id integer primary key autoincrement, "
 			+ "county_name text, "
 			+ "county_code text, "
@@ -42,8 +42,10 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
-
+		db.execSQL("drop table if exists provice");
+		db.execSQL("drop table if exists city");
+		db.execSQL("drop table if exists county");
+		onCreate(db);
 	}
 
 }

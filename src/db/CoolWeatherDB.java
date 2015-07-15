@@ -20,7 +20,7 @@ public class CoolWeatherDB {
 	/*
 	 * database version
 	 */
-	public static final int VERSION = 1;
+	public static final int VERSION = 2;
 	private static CoolWeatherDB coolWeatherDB;
 	private SQLiteDatabase db;
 	
@@ -57,7 +57,7 @@ public class CoolWeatherDB {
 				Province province = new Province();
 				province.setId(cursor.getInt(cursor.getColumnIndex("id")));
 				province.setProvinceName(cursor.getString(cursor.getColumnIndex("province_name")));
-				province.setProvinceCode(cursor.getString(cursor.getColumnIndex("")));
+				province.setProvinceCode(cursor.getString(cursor.getColumnIndex("province_code")));
 				provinceList.add(province);
 			}while (cursor.moveToNext());
 		}
