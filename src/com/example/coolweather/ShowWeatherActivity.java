@@ -1,5 +1,7 @@
 package com.example.coolweather;
 
+import reciever.AutoUpdateReceiver;
+import service.AutoUpdateService;
 import util.HttpCallbackListener;
 import util.HttpUtil;
 import util.ParseUtil;
@@ -12,6 +14,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -54,6 +57,7 @@ public class ShowWeatherActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.weather_layout);
 		weatherInfoLayout = (LinearLayout) findViewById(R.id.weather_info_layout);
 		cityNameText = (TextView) findViewById(R.id.city_name);
@@ -122,6 +126,8 @@ public class ShowWeatherActivity extends Activity {
 				currentDateText.setText(prefs.getString("current_date", ""));
 				weatherInfoLayout.setVisibility(View.VISIBLE);
 				cityNameText.setVisibility(View.VISIBLE);
+				Intent intent = new Intent(this,AutoUpdateService.class);
+				startService(intent);
 	}
 	/*
 	 * 查询天气代号所对应的天气
